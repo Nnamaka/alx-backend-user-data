@@ -9,6 +9,7 @@ from typing import List
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
+
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
     """
@@ -48,7 +49,7 @@ class RedactingFormatter(logging.Formatter):
         message = super(RedactingFormatter, self).format(record)
         redacted = filter_datum(self.fields, self.REDACTION,
                                 message, self.SEPARATOR)
-        
+
         return redacted
 
 
@@ -77,9 +78,9 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     db_name = os.getenv('PERSONAL_DATA_DB_NAME')
 
     connection = mysql.connector.connect(user=user,
-                                   password=password,
-                                   host=host,
-                                   database=db_name)
+                                         password=password,
+                                         host=host,
+                                         database=db_name)
     return connection
 
 
@@ -91,7 +92,7 @@ def main():
     cursor = db.cursor()
 
     cursor.execute("SELECT * FROM users;")
-    
+
     fields = cursor.column_names
     for row in cursor:
         message = "".join("{}={}; ".format(k, v) for k, v in zip(fields, row))
