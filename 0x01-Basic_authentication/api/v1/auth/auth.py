@@ -20,7 +20,7 @@ class Auth:
 
         if path is None:
             return True
-        
+
         # make 'path' forward slash tolerant
         if path[-1] != '/':
             path += '/'
@@ -29,7 +29,7 @@ class Auth:
             return True
         elif path in excluded_paths:
             return False
-        
+
         return False
 
     def authorization_header(self, request=None) -> str:
