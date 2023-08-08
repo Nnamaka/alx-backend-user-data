@@ -30,7 +30,11 @@ class Auth:
         elif path in excluded_paths:
             return False
         
-        return False
+        for exp in excluded_paths:
+            if exp[-1] == "*" and path.startswith(exp[:-1]):
+                return False
+        
+        return True
 
     def authorization_header(self, request=None) -> str:
         return None
