@@ -34,6 +34,8 @@ def before_request_func():
     if auth is None:
         return
     if auth.require_auth(request.path, excluded_paths):
+        pass
+    else:
         return
 
     if auth.authorization_header(request) is None:
