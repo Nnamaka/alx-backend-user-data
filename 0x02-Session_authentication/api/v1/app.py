@@ -26,6 +26,7 @@ elif os.getenv("AUTH_TYPE") == "session_auth":
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
 
+
 @app.before_request
 def before_request_func():
     """
@@ -46,6 +47,7 @@ def before_request_func():
     if auth.current_user(request) is None:
         abort(403)
     request.current_user = auth.current_user(request)
+
 
 @app.errorhandler(404)
 def not_found(error) -> str:
