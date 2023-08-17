@@ -54,7 +54,7 @@ class Auth:
             hashed = _hash_password(password)
             userr = self._db.add_user(email, hashed)
             return userr
-        
+
         raise ValueError(f"User {email} already exists")
 
     def valid_login(self, email: str, password: str) -> bool:
@@ -120,7 +120,7 @@ class Auth:
             self._db.update_user(user_id, session_id=None)
         except ValueError:
             return None
-        
+
         return None
 
     def get_reset_password_token(self, email: str) -> str:

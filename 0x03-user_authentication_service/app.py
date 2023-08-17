@@ -81,7 +81,7 @@ def profile() -> str:
 
     if user:
         return jsonify({"email": f"{user.email}"}), 200
-    
+
     abort(403)
 
 
