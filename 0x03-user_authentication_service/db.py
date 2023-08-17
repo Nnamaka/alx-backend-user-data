@@ -61,11 +61,11 @@ class DB:
         for key, val in kwargs.items():
             if key not in User.__dict__:
                 raise InvalidRequestError
-            
+
             for userr in users:
                 if getattr(userr, key) == val:
                     return userr
-                
+
         raise NoResultFound
 
     def update_user(self, user_id: int, **kwargs) -> None:
@@ -79,11 +79,11 @@ class DB:
             userr = self.find_user_by(id=user_id)
         except NoResultFound:
             raise ValueError()
-        
+
         for key, val in kwargs.items():
             if hasattr(userr, key):
                 setattr(userr, key, val)
             else:
                 raise ValueError
-            
+
         self._session.commit()
